@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Chatty.Web.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly IUserManager userManager;

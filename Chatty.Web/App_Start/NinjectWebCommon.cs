@@ -8,6 +8,7 @@ namespace Chatty.Web.App_Start
     using System.Web;
     using Chatty.Core.Authentication;
     using Chatty.Core.ChatRoom;
+    using Chatty.Core.User;
     using Chatty.Database;
     using Chatty.Database.Models;
     using Chatty.Database.Repositories;
@@ -89,6 +90,7 @@ namespace Chatty.Web.App_Start
             kernel.Bind<IRepository<ApplicationUser>>().To<UserRepository>();
 
             kernel.Bind<IChatRoomManager>().To<ChatRoomManager>();
+            kernel.Bind<IUserManager>().To<UserManager>();
         }        
     }
 }
