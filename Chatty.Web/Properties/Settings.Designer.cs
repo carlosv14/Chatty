@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Chatty.ChatBot.Properties {
+namespace Chatty.Web.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -47,18 +47,6 @@ namespace Chatty.ChatBot.Properties {
         public string ResultQueueName {
             get {
                 return ((string)(this["ResultQueueName"]));
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://stooq.com/q/l/?s={0}&f=sd2t2ohlcv&h&e=csv")]
-        public string StockDataUrl {
-            get {
-                return ((string)(this["StockDataUrl"]));
-            }
-            set {
-                this["StockDataUrl"] = value;
             }
         }
     }

@@ -1,5 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Chatty.ChatBot.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Chatty.Web.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
     <Setting Name="ChatBotServerUrl" Type="System.String" Scope="Application">
@@ -10,9 +10,6 @@
     </Setting>
     <Setting Name="ResultQueueName" Type="System.String" Scope="Application">
       <Value Profile="(Default)">result</Value>
-    </Setting>
-    <Setting Name="StockDataUrl" Type="System.String" Scope="User">
-      <Value Profile="(Default)">https://stooq.com/q/l/?s={0}&amp;f=sd2t2ohlcv&amp;h&amp;e=csv</Value>
     </Setting>
   </Settings>
 </SettingsFile>

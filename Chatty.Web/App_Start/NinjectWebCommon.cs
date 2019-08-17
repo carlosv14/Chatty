@@ -17,7 +17,7 @@ namespace Chatty.Web.App_Start
     using Chatty.Database.Repositories;
     using Chatty.Web.Hubs.Clients;
     using Chatty.Web.Hubs.Servers;
-    using Chatty.Web.Hubs.Ticker;
+    using Chatty.Web.Hubs.Tickers;
     using Chatty.Web.Utils.Security;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;

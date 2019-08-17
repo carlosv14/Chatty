@@ -7,19 +7,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chatty.ChatBot
+namespace Chatty.ChatBot.Bots
 {
-    public class ChatBotServer : IChatBotServer
+    public class StockBotServer : IChatBotServer
     {
         private readonly IConnection connection;
         private readonly IModel channel;
         private readonly EventingBasicConsumer consumer;
         private readonly Dictionary<string, ICommandResolver<string>> commands;
-        public ChatBotServer()
+        public StockBotServer()
         {
             this.commands = new Dictionary<string, ICommandResolver<string>>()
             {
-                { "stock",  new StockCommandResolver() }
+                { "stock",  new StockQuoteCommandResolver() }
             };
 
             var factory = new ConnectionFactory() { HostName = Properties.Settings.Default.ChatBotServerUrl };
@@ -53,11 +53,13 @@ namespace Chatty.ChatBot
 
         private Task<string> ProcessCommandAsync(string command)
         {
-            if (!commands.ContainsKey(command))
+            var commandParts = command.Split('=');
+            var key = commandParts[0];
+            if (!commands.ContainsKey(key))
             {
                 throw new Exception("Command not found");
             }
-            return this.commands[command].ResolveAsync();
+            return this.commands[key].ResolveAsync(commandParts[1]);
         }
 
         public void Start()

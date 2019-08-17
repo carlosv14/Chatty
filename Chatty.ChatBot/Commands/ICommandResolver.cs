@@ -8,6 +8,6 @@ namespace Chatty.ChatBot.Commands
 {
     public interface ICommandResolver<TResult>
     {
-        Task<TResult> ResolveAsync();
+        Task<TResult> ResolveAsync(string parameter);
     }
 }
