@@ -14,6 +14,7 @@ namespace Chatty.Database.Models
         public ApplicationUser()
         {
             this.ChatRooms = new HashSet<ChatRoom>();
+            this.Messages = new HashSet<Message>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -23,5 +24,7 @@ namespace Chatty.Database.Models
         }
 
         public virtual ICollection<ChatRoom> ChatRooms { get; set; }
+
+        public virtual ICollection<Message> Messages { get; set; }
     }
 }

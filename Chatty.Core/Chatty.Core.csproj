@@ -79,6 +79,8 @@
     <Compile Include="Authentication\ApplicationUserManager.cs" />
     <Compile Include="ChatRoom\ChatRoomManager.cs" />
     <Compile Include="ChatRoom\IChatRoomManager.cs" />
+    <Compile Include="Message\IMessageManager.cs" />
+    <Compile Include="Message\MessageManager.cs" />
     <Compile Include="OperationResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\IUserManager.cs" />

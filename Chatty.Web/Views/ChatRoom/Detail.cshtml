@@ -1,0 +1,63 @@
+﻿@model Chatty.Web.Models.ChatRoom.ChatRoomDetailViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+@section scripts{
+
+    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/signalr/hubs"></script>
+    <script src="~/Scripts/TypeScripts/ChatHubClient.js"></script>
+    <script>
+        let chatHubClient = new ChatHubClient();
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#btnSendMessage").attr("disabled", true);
+            $("#inputMessage").bind('input propertychange', function () {
+                let message = this.value;
+                if (message !== "" && chatHubClient.hasStarted()) {
+                    $("#btnSendMessage").attr("disabled", false);
+                } else {
+                     $("#btnSendMessage").attr("disabled", true);
+                }
+            });
+
+            $("#btnSendMessage").click(function () {
+                let message =  $("#inputMessage").val();
+                chatHubClient.sendMessage(message);
+                $("#inputMessage").val("");
+            });
+        });
+    </script>
+
+}
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="card-title">@Model.Name</h2>
+        <div id="messageBox" class="card-text">
+            @for(int i=0; i< Model.Messages.Count(); i++)
+            {
+                <div id="message-@i" class="alert alert-primary" role="alert">
+                    [@Model.Messages.ElementAt(i).Date] - @Model.Messages.ElementAt(i).UserName: @Model.Messages.ElementAt(i).Message
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<br />
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="card-text">
+            <textarea id="inputMessage" class="form-control"></textarea>
+            <br />
+            <button id="btnSendMessage" class="btn btn-primary btn-block">Send</button>
+        </div>
+    </div>
+</div>
+

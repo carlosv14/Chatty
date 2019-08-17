@@ -4,18 +4,25 @@
 namespace Chatty.Web.App_Start
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Linq;
     using System.Web;
     using Chatty.Core.Authentication;
     using Chatty.Core.ChatRoom;
+    using Chatty.Core.Message;
     using Chatty.Core.User;
     using Chatty.Database;
     using Chatty.Database.Models;
     using Chatty.Database.Repositories;
+    using Chatty.Web.Hubs.Clients;
+    using Chatty.Web.Hubs.Servers;
+    using Chatty.Web.Hubs.Ticker;
     using Chatty.Web.Utils.Security;
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
     using Microsoft.AspNet.Identity.Owin;
+    using Microsoft.AspNet.SignalR;
     using Microsoft.Owin.Security;
     using Microsoft.Owin.Security.DataProtection;
     using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -88,9 +95,34 @@ namespace Chatty.Web.App_Start
 
             kernel.Bind<IRepository<ChatRoom>>().To<ChatRoomRepository>();
             kernel.Bind<IRepository<ApplicationUser>>().To<UserRepository>();
+            kernel.Bind<IRepository<Message>>().To<MessageRepository>();
 
             kernel.Bind<IChatRoomManager>().To<ChatRoomManager>();
             kernel.Bind<IUserManager>().To<UserManager>();
-        }        
+            kernel.Bind<IMessageManager>().To<MessageManager>();
+
+            GlobalHost.DependencyResolver = new SignalRStartupResolver(kernel);
+            kernel.Bind<ChatHub>().ToSelf().InRequestScope();
+            kernel.Bind<IChatTicker>().To<ChatTicker>().InRequestScope();
+            kernel.Bind<IHubContext<IChatClient>>().ToMethod(c => GlobalHost.ConnectionManager.GetHubContext<ChatHub, IChatClient>());
+        }     
+        
+        private class SignalRStartupResolver : DefaultDependencyResolver
+        {
+            private readonly IKernel kernel;
+            public SignalRStartupResolver(IKernel kernel)
+            {
+                this.kernel = kernel;
+            }
+            public override object GetService(Type serviceType)
+            {
+                return this.kernel.TryGet(serviceType) ?? base.GetService(serviceType);
+            }
+
+            public override IEnumerable<object> GetServices(Type serviceType)
+            {
+                return this.kernel.GetAll(serviceType).Concat(base.GetServices(serviceType));
+            }
+        }
     }
 }

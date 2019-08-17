@@ -1,5 +1,8 @@
 ﻿using Chatty.Core.ChatRoom;
 using Chatty.Core.User;
+using Chatty.Database.Models;
+using Chatty.Database.Repositories;
+using Chatty.Web.Models.ChatRoom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,33 +12,25 @@ using System.Web.Mvc;
 
 namespace Chatty.Web.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
-        private readonly IUserManager userManager;
+        private readonly IRepository<ChatRoom> chatRoomRepository;
 
-        public HomeController(IUserManager userManager)
+        public HomeController(IRepository<ChatRoom> chatRoomRepository)
         {
-            this.userManager = userManager;
+            this.chatRoomRepository = chatRoomRepository;
         }
+
         public ActionResult Index()
         {
-            return View();
-        }
+            var chatRooms = this.chatRoomRepository.All()
+                .Select(x => new ChatRoomListItemViewModel
+                {
+                    Name = x.Name,
+                    NumberOfUsers = x.Users.Count()
+                });
 
-        public async Task<ActionResult> About()
-        {
-            await this.userManager.JoinRoomAsync();
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
+            return View(chatRooms);
         }
     }
 }

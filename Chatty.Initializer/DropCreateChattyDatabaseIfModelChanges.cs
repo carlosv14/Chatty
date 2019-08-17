@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Chatty.Initializers
 {
-    class DropCreateChattyDatabaseAlways : DropCreateDatabaseAlways<ChattyContext>
+    class DropCreateChattyDatabaseIfModelChanges : DropCreateDatabaseIfModelChanges<ChattyContext>
     {
         protected override void Seed(ChattyContext context)
         {
