@@ -15,12 +15,17 @@ namespace Chatty.Database.Models
 
         public string Content { get; set; }
 
-        public TimeSpan TimeSpan { get; set; }
+        public DateTime Date { get; set; }
 
         [ForeignKey(nameof(ChatRoom))]
         [StringLength(50)]
         public string ChatRoomId { get; set; }
 
         public virtual ChatRoom ChatRoom { get; set; }
+
+        [ForeignKey(nameof(User))]
+        public string UserId { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
     }
 }

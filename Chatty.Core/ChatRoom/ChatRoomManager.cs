@@ -40,5 +40,14 @@ namespace Chatty.Core.ChatRoom
             await this.chatRoomRepository.SaveChangesAsync();
             return new OperationResult(true);
         }
+
+        public async Task<IEnumerable<Database.Models.Message>> GetMessagesAsync(string chatRoomName)
+        {
+            var chatRoom = await this.chatRoomRepository.FindAsync(chatRoomName);
+            return chatRoom
+                .Messages
+                .OrderByDescending(x => x.Date)
+                .Take(50);
+        }
     }
 }

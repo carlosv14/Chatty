@@ -19,7 +19,7 @@ namespace Chatty.Initializer
             var chatRoomRepository = new ChatRoomRepository(context);
             chatRoomRepository.Create(new ChatRoom
             {
-                Name = "Default Room"
+                Name = "Default Room",
             });
 
             await chatRoomRepository.SaveChangesAsync();
