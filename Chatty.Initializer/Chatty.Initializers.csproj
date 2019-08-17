@@ -57,6 +57,7 @@
     <Compile Include="ApplicationUserStore.cs" />
     <Compile Include="ChattySeed.cs" />
     <Compile Include="DropCreateChattyDatabaseAlways.cs" />
+    <Compile Include="DropCreateChattyDatabaseIfModelChanges.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
