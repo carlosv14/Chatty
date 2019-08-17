@@ -25,6 +25,7 @@
             });
 
             $("#btnSendMessage").click(function () {
+                let message =  $("#inputMessage").val();
                 chatHubClient.sendMessage(message);
                 $("#inputMessage").val("");
             });

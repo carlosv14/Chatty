@@ -46,7 +46,7 @@ namespace Chatty.Core.ChatRoom
             var chatRoom = await this.chatRoomRepository.FindAsync(chatRoomName);
             return chatRoom
                 .Messages
-                .OrderByDescending(x => x.Date)
+                .OrderBy(x => x.Date)
                 .Take(50);
         }
     }

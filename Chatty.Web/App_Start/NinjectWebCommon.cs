@@ -10,6 +10,7 @@ namespace Chatty.Web.App_Start
     using System.Web;
     using Chatty.Core.Authentication;
     using Chatty.Core.ChatRoom;
+    using Chatty.Core.Message;
     using Chatty.Core.User;
     using Chatty.Database;
     using Chatty.Database.Models;
@@ -98,6 +99,7 @@ namespace Chatty.Web.App_Start
 
             kernel.Bind<IChatRoomManager>().To<ChatRoomManager>();
             kernel.Bind<IUserManager>().To<UserManager>();
+            kernel.Bind<IMessageManager>().To<MessageManager>();
 
             GlobalHost.DependencyResolver = new SignalRStartupResolver(kernel);
             kernel.Bind<ChatHub>().ToSelf().InRequestScope();
