@@ -17,7 +17,12 @@
     }
 
     private receiveMessage(message: string): void {
-        $("#messageBox").append(`<div class="alert alert-primary" role="alert">${message}</div>`)
+        let messages = $("#messageBox").find("div");
+        let id = messages.length;
+        if (messages.length > 49) {
+            messages.first().remove();
+        }
+        $("#messageBox").append(`<div id="message-${id}" class="alert alert-primary" role="alert">${message}</div>`)
     }
 
     public sendMessage(message: string): void {

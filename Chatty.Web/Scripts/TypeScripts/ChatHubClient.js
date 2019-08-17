@@ -13,7 +13,12 @@ var ChatHubClient = /** @class */ (function () {
         return this.started;
     };
     ChatHubClient.prototype.receiveMessage = function (message) {
-        $("#messageBox").append("<div class=\"alert alert-primary\" role=\"alert\">" + message + "</div>");
+        var messages = $("#messageBox").find("div");
+        var id = messages.length;
+        if (messages.length > 49) {
+            messages.first().remove();
+        }
+        $("#messageBox").append("<div id=\"message-" + id + "\" class=\"alert alert-primary\" role=\"alert\">" + message + "</div>");
     };
     ChatHubClient.prototype.sendMessage = function (message) {
         this.hub.server.sendMessage(message);

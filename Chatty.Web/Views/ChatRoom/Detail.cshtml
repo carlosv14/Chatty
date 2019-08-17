@@ -38,10 +38,10 @@
     <div class="card-body">
         <h2 class="card-title">@Model.Name</h2>
         <div id="messageBox" class="card-text">
-            @foreach (var message in Model.Messages)
+            @for(int i=0; i< Model.Messages.Count(); i++)
             {
-                <div class="alert alert-primary" role="alert">
-                    [@message.Date] - @message.UserName: @message.Message
+                <div id="message-@i" class="alert alert-primary" role="alert">
+                    [@Model.Messages.ElementAt(i).Date] - @Model.Messages.ElementAt(i).UserName: @Model.Messages.ElementAt(i).Message
                 </div>
             }
         </div>
