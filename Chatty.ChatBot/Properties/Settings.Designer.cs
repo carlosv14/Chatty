@@ -49,5 +49,17 @@ namespace Chatty.ChatBot.Properties {
                 return ((string)(this["ResultQueueName"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://stooq.com/q/l/?s=aapl.us&f=sd2t2ohlcv&h&e=csv")]
+        public string StockDataUrl {
+            get {
+                return ((string)(this["StockDataUrl"]));
+            }
+            set {
+                this["StockDataUrl"] = value;
+            }
+        }
     }
 }
