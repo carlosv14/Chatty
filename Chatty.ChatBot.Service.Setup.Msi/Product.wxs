@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?define Name = "Chatty Chat Bot Service" ?>
+<?define Manufacturer = "Carlos Varela" ?>
+<?define Version = "1.0.1" ?>
+<?define UpgradeCode = "{1240E0CD-B3D2-44A7-B064-11B3C0709D69}" ?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="$(var.Name)" Manufacturer="$(var.Manufacturer)" UpgradeCode="$(var.UpgradeCode)" Version="$(var.Version)" Language="1033">
+    <Package InstallerVersion="300" Compressed="yes"/>
+    <Media Id="1" Cabinet="ChatBotService.cab" EmbedCab="yes" />
+    <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="ROOTDIRECTORY" Name="$(var.Manufacturer)">
+          <Directory Id="INSTALLFOLDER" Name="$(var.Name)" />
+        </Directory>
+      </Directory>
+    </Directory>
+    <DirectoryRef Id="INSTALLFOLDER">
+      <Component Id="$(var.Chatty.ChatBot.WindowsServiceHost.TargetFileName)" Guid="84d5847b-7920-49fa-8a30-db87931fdbeb">
+        <File Id="$(var.Chatty.ChatBot.WindowsServiceHost.TargetFileName)" Source="$(var.Chatty.ChatBot.WindowsServiceHost.TargetPath)" KeyPath="yes" />
+        <File Id="Chatty.ChatBot.Logic.dll" Source="$(var.Chatty.ChatBot.WindowsServiceHost.TargetDir)\Chatty.ChatBot.Logic.dll" KeyPath="no" />
+        <File Id="RabbitMQ.Client.dll" Source="$(var.Chatty.ChatBot.WindowsServiceHost.TargetDir)\RabbitMQ.Client.dll" KeyPath="no" />
+        <File Id="Chatty.ChatBot.Logic.dll.config" Source="$(var.Chatty.ChatBot.WindowsServiceHost.TargetDir)\Chatty.ChatBot.Logic.dll.config" KeyPath="no" />
+
+        <RemoveFile Id="ALLFILES" Name="*.*" On="both" />
+        <ServiceInstall Id="ServiceInstaller"
+        Type="ownProcess"
+        Name="Chat Bot Service"
+        DisplayName="$(var.Name)"
+        Description="Windows service that runs the chat bot for chatty."
+        Start="auto"
+        ErrorControl="normal" />
+        <ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="Chat Bot Service" Wait="yes" />
+      </Component>
+    </DirectoryRef>
+    <Feature Id="MainApplication" Title="Main Application" Level="1">
+      <ComponentRef Id="$(var.Chatty.ChatBot.WindowsServiceHost.TargetFileName)" />
+    </Feature>
+  </Product>
+</Wix>

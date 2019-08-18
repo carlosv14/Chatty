@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Chatty.ChatBot.Bots
+namespace Chatty.ChatBot.Logic.Bots
 {
     public interface IChatBotServer
     {
