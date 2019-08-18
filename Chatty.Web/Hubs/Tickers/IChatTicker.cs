@@ -10,6 +10,10 @@ namespace Chatty.Web.Hubs.Tickers
     {
         Task SendMessage(string message);
 
+        void ConfigureBotQueues();
 
+        Task SendBotMessageAsync(byte[] content);
+
+        void ParseCommand(string command);
     }
 }

@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatty.ChatBot", "Chatty.Ch
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatty.ChatBot.ConsoleHost", "Chatty.ChatBot.ConsoleHost\Chatty.ChatBot.ConsoleHost.csproj", "{9F53D601-1AEB-489C-93CB-8C7A4BA2CCF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chatty.Tests", "Chatty.Tests\Chatty.Tests.csproj", "{B8B6FE8D-BF32-4ECE-9E6E-B5ED3D3F0DA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{9F53D601-1AEB-489C-93CB-8C7A4BA2CCF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F53D601-1AEB-489C-93CB-8C7A4BA2CCF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F53D601-1AEB-489C-93CB-8C7A4BA2CCF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B6FE8D-BF32-4ECE-9E6E-B5ED3D3F0DA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B6FE8D-BF32-4ECE-9E6E-B5ED3D3F0DA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B6FE8D-BF32-4ECE-9E6E-B5ED3D3F0DA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B6FE8D-BF32-4ECE-9E6E-B5ED3D3F0DA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

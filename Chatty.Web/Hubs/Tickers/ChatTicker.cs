@@ -44,7 +44,7 @@ namespace Chatty.Web.Hubs.Tickers
             this.ConfigureBotQueues();
         }
 
-        private void ConfigureBotQueues()
+        public void ConfigureBotQueues()
         {
             this.channel.QueueDeclare(queue: Properties.Settings.Default.ResultQueueName,
                                  durable: false,
@@ -61,10 +61,10 @@ namespace Chatty.Web.Hubs.Tickers
             channel.BasicConsume(queue: Properties.Settings.Default.ResultQueueName,
                                  autoAck: true,
                                  consumer: consumer);
-            this.consumer.Received += async (model, ea) => await this.SendBotMessage(ea.Body);
+            this.consumer.Received += async (model, ea) => await this.SendBotMessageAsync(ea.Body);
         }
 
-        public async Task SendBotMessage(byte[] content)
+        public async Task SendBotMessageAsync(byte[] content)
         {
             var message = Encoding.UTF8.GetString(content);
             this.hubContext.Clients.All.SendMessage($"[{DateTime.Now}] - stock-bot: {message}");
