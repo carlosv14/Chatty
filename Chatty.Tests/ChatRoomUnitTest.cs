@@ -14,7 +14,7 @@ namespace Chatty.Tests
     public class ChatRoomUnitTest
     {
         [TestMethod]
-        public async Task RoomChatShowsLastFiftyMessagesOnly()
+        public async Task RoomChatShowsOnlyFiftyMessages()
         {
             var chatRooms = this.GetChatRooms();
             var chatRoomRepositoryMock = new Mock<IRepository<ChatRoom>>();
@@ -27,7 +27,42 @@ namespace Chatty.Tests
             var chatRoomManager = new ChatRoomManager(chatRoomRepositoryMock.Object, userRepositoryMock.Object);
             var messages = await chatRoomManager.GetMessagesAsync("Default Room");
 
-            Assert.AreEqual(messages.Count(), 50);
+            Assert.IsTrue(messages.Count() <= 50);
+        }
+
+        [TestMethod]
+        public async Task RoomChatShowsMessagesOrderedByTimespan()
+        {
+            var chatRooms = this.GetChatRooms();
+            var chatRoomRepositoryMock = new Mock<IRepository<ChatRoom>>();
+            var userRepositoryMock = new Mock<IRepository<ApplicationUser>>();
+
+            chatRoomRepositoryMock.Setup(x => x.All()).Returns(chatRooms.AsQueryable());
+            chatRoomRepositoryMock.Setup(x => x.FindAsync(It.IsAny<object[]>()))
+                .Returns((object[] name) => Task.FromResult(chatRooms.FirstOrDefault(c => c.Name == name.First().ToString())));
+
+            var chatRoomManager = new ChatRoomManager(chatRoomRepositoryMock.Object, userRepositoryMock.Object);
+            var messages = await chatRoomManager.GetMessagesAsync("Second Room");
+
+            var messagesInCorrectOrder = new List<Message>
+                   {
+                        new Message { Date = new DateTime(2019, 08, 17, 8, 20,0), Content = "Message 2", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 21,0), Content = "Message 3", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 22,0), Content = "Message 4", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 23,0), Content = "Message 5", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 24,0), Content = "Message 6", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 25,0), Content = "Message 7", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 26,0), Content = "Message 8", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 27,0), Content = "Message 9", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 28,0), Content = "Message 10", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 29,0), Content = "Message 11", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 30,0), Content = "Message 12", UserId="3"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 31,0), Content = "Message 13", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 32,0), Content = "Message 14", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 33,0), Content = "Message 15", UserId="3"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 34,0), Content = "Message 16", UserId="4"},
+                   };
+            CollectionAssert.AreEqual(messages.Select(x => x.Date).ToList(), messagesInCorrectOrder.Select(x => x.Date).ToList());
         }
 
         private List<ChatRoom> GetChatRooms()
@@ -100,21 +135,21 @@ namespace Chatty.Tests
                    Name = "Second Room",
                    Messages = new List<Message>
                    {
-                        new Message { Date = DateTime.Now.AddMinutes(1), Content = "Message 2", UserId="1"},
-                        new Message { Date = DateTime.Now.AddMinutes(2), Content = "Message 3", UserId="2"},
-                        new Message { Date = DateTime.Now.AddMinutes(3), Content = "Message 4", UserId="1"},
-                        new Message { Date = DateTime.Now.AddMinutes(4), Content = "Message 5", UserId="2"},
-                        new Message { Date = DateTime.Now.AddMinutes(5), Content = "Message 6", UserId="1"},
-                        new Message { Date = DateTime.Now.AddMinutes(6), Content = "Message 7", UserId="2"},
-                        new Message { Date = DateTime.Now.AddMinutes(7), Content = "Message 8", UserId="1"},
-                        new Message { Date = DateTime.Now.AddMinutes(8), Content = "Message 9", UserId="2"},
-                        new Message { Date = DateTime.Now.AddMinutes(9), Content = "Message 10", UserId="1"},
-                        new Message { Date = DateTime.Now.AddMinutes(10), Content = "Message 11", UserId="2"},
-                        new Message { Date = DateTime.Now.AddMinutes(11), Content = "Message 12", UserId="3"},
-                        new Message { Date = DateTime.Now.AddMinutes(12), Content = "Message 13", UserId="1"},
-                        new Message { Date = DateTime.Now.AddMinutes(13), Content = "Message 14", UserId="2"},
-                        new Message { Date = DateTime.Now.AddMinutes(14), Content = "Message 15", UserId="3"},
-                        new Message { Date = DateTime.Now.AddMinutes(15), Content = "Message 16", UserId="4"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 27,0), Content = "Message 9", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 34,0), Content = "Message 16", UserId="4"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 28,0), Content = "Message 10", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 33,0), Content = "Message 15", UserId="3"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 31,0), Content = "Message 13", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 32,0), Content = "Message 14", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 30,0), Content = "Message 12", UserId="3"},
+                        new Message { Date = new DateTime(2019, 08, 17, 8, 20,0), Content = "Message 2", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 29,0), Content = "Message 11", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 22,0), Content = "Message 4", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 21,0), Content = "Message 3", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 24,0), Content = "Message 6", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 26,0), Content = "Message 8", UserId="1"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 23,0), Content = "Message 5", UserId="2"},
+                        new Message { Date =  new DateTime(2019, 08, 17, 8, 25,0), Content = "Message 7", UserId="2"},
                    }
                 }
             };
