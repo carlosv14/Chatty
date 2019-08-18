@@ -18,7 +18,12 @@ var ChatHubClient = /** @class */ (function () {
         if (messages.length > 49) {
             messages.first().remove();
         }
-        $("#messageBox").append("<div id=\"message-" + id + "\" class=\"alert alert-primary\" role=\"alert\">" + message + "</div>");
+        if (message.indexOf("bot:") !== -1) {
+            $("#messageBox").append("<div id=\"message-" + id + "\" class=\"alert alert-success\" role=\"alert\">" + message + "</div>");
+        }
+        else {
+            $("#messageBox").append("<div id=\"message-" + id + "\" class=\"alert alert-primary\" role=\"alert\">" + message + "</div>");
+        }
     };
     ChatHubClient.prototype.sendMessage = function (message) {
         this.hub.server.sendMessage(message);
