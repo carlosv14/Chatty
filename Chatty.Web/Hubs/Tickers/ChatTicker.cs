@@ -75,13 +75,14 @@ namespace Chatty.Web.Hubs.Tickers
             command = command.Remove(0, 1);
             var body = Encoding.UTF8.GetBytes(command);
             channel.BasicPublish(exchange: "",
-                             routingKey: "input",
+                             routingKey: Properties.Settings.Default.CommandInQueueName,
                              basicProperties: null,
                              body: body);
         }
 
         public async Task SendMessage(string message)
         {
+            message = message.Trim();
             if (message.StartsWith(@"/stock"))
             {
                 this.ParseCommand(message);
