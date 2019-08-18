@@ -64,7 +64,7 @@ namespace Chatty.ChatBot.Bots
 
         public void Start()
         {
-            this.channel.BasicConsume(queue: "input",
+            this.channel.BasicConsume(queue: Properties.Settings.Default.CommandInQueueName,
                                     autoAck: true,
                                     consumer: consumer);
         }
