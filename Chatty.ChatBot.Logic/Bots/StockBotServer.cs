@@ -1,4 +1,4 @@
-﻿using Chatty.ChatBot.Commands;
+﻿using Chatty.ChatBot.Logic.Commands;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chatty.ChatBot.Bots
+namespace Chatty.ChatBot.Logic.Bots
 {
     public class StockBotServer : IChatBotServer
     {

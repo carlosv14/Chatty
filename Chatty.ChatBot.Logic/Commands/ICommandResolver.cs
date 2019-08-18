@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chatty.ChatBot.Commands
+namespace Chatty.ChatBot.Logic.Commands
 {
     public interface ICommandResolver<TResult>
     {

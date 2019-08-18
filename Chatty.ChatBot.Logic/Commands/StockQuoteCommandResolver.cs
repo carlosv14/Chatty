@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chatty.ChatBot.Commands
+namespace Chatty.ChatBot.Logic.Commands
 {
     public class StockQuoteCommandResolver : ICommandResolver<string>
     {
