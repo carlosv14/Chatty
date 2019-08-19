@@ -42,5 +42,5 @@ Chat bot is a separate project, you can either run the console project called Ch
 * User encrypted password and strength validation.
 * Windows Service Installer for chat bot.
 * Unit Testing with mocks.
-* Query stock quotes with `command: /stock=stock_code`
+* Query stock quotes with command: `/stock=stock_code`
 
