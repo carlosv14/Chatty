@@ -9,6 +9,7 @@ Realtime browser-based chat application with a bot that queries stock quotes.
 * SignalR
 * EntityFramework
 * Moq
+* Wix Toolset
 
 ## Setup
 `git clone https://github.com/carlosv14/Chatty.git`
@@ -19,6 +20,10 @@ Realtime browser-based chat application with a bot that queries stock quotes.
 
 ### Prerequisites
 It is important before running anything to download and install [RabbitMq Server](https://www.rabbitmq.com/download.html).
+
+### Configurations
+* By default the address for RabbitMq server is localhost, you can change this and the queues names in the website's web config and the windows service or console application configuration files. Make sure server address and queues names match in both files if changed.
+* The endpoint URL that returns the stock information is also configurable in the windows service or console application configuration file.
 
 ### Run chat website
 You'll need visual studio with IIS Express or changing the settings to run on local IIS if desired. Default connection string is using localdb and code first approach with entity framework was used for the database. 
@@ -31,11 +36,11 @@ Project includes two initializers to drop and create database as needed, by defa
 3) Run
 
 ### Run Chat Bot
-Chat bot is a separate project, you can either run the console project called Chatty.ChatBot.ConsoleHost or download and install [Chat Bot Windows Service](https://drive.google.com/file/d/1HMag2ydp4c6IM4gt8sL2IrfnZk5tCLfO/view?usp=sharing).
+Chat bot is a separate project, you can either run the console project called "Chatty.ChatBot.ConsoleHost" or download and install [Chat Bot Windows Service](https://drive.google.com/file/d/1HMag2ydp4c6IM4gt8sL2IrfnZk5tCLfO/view?usp=sharing).
 
 #### Steps
 1) Make sure [RabbitMq Server](https://www.rabbitmq.com/download.html) is installed and running on default ports.
-2) Run console application or make sure Chat Bot Windows Service is running.
+2) Run console application or Chat Bot Windows Service.
 
 ### Features
 * Microsft Asp.net identity authentication.
@@ -44,3 +49,5 @@ Chat bot is a separate project, you can either run the console project called Ch
 * Unit Testing with mocks.
 * Query stock quotes with command: `/stock=stock_code`
 
+### Live Demo
+A live demo of the chat can be found here: http://3.14.149.117/Chatty
