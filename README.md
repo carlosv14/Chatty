@@ -32,11 +32,14 @@ Project includes two initializers to drop and create database as needed, by defa
 ### Run Chat Bot
 Chat bot is a separate project you can either run the console project called Chatty.ChatBot.ConsoleHost or download and install Chat Bot Windows Service.
 
+#### Steps
 1) Make sure [RabbitMq Server](https://www.rabbitmq.com/download.html) is installed and running on default ports.
 2) Run console application or make sure Chat Bot Windows Service is running.
 
 ### Features
 * Microsft Asp.net identity authentication.
+* User encrypted password and strength validation.
 * Windows Service Installer for chat bot.
 * Unit Testing.
+* Query stock quotes with `command: /stock=stock_code`
 
