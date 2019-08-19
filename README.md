@@ -19,7 +19,8 @@ Realtime browser-based chat application with a bot that queries stock quotes.
 * [RabbitMq Server](https://www.rabbitmq.com/download.html) running on default ports.
 
 ### Prerequisites
-It is important before running anything to download and install [RabbitMq Server](https://www.rabbitmq.com/download.html).
+* It is important before running anything to download and install [RabbitMq Server](https://www.rabbitmq.com/download.html).
+* [Wix Toolset](https://wixtoolset.org/releases/) (This is optional). 
 
 ### Configurations
 * By default the address for RabbitMq server is localhost, you can change this and the queues names in the website's web config and the windows service or console application configuration files. Make sure server address and queues names match in both files if changed.
@@ -37,6 +38,8 @@ Project includes two initializers to drop and create database as needed, by defa
 
 ### Run Chat Bot
 Chat bot is a separate project, you can either run the console project called "Chatty.ChatBot.ConsoleHost" or download and install [Chat Bot Windows Service](https://drive.google.com/file/d/1HMag2ydp4c6IM4gt8sL2IrfnZk5tCLfO/view?usp=sharing).
+
+You can also generate your own installer by compiling the project 'Chatty.ChatBot.Service.Setup.Msi' but you'll need wix toolset for this.
 
 #### Steps
 1) Make sure [RabbitMq Server](https://www.rabbitmq.com/download.html) is installed and running on default ports.
