@@ -31,7 +31,7 @@ Project includes two initializers to drop and create database as needed, by defa
 3) Run
 
 ### Run Chat Bot
-Chat bot is a separate project, you can either run the console project called Chatty.ChatBot.ConsoleHost or download and install Chat Bot Windows Service.
+Chat bot is a separate project, you can either run the console project called Chatty.ChatBot.ConsoleHost or download and install [Chat Bot Windows Service](https://drive.google.com/file/d/1HMag2ydp4c6IM4gt8sL2IrfnZk5tCLfO/view?usp=sharing).
 
 #### Steps
 1) Make sure [RabbitMq Server](https://www.rabbitmq.com/download.html) is installed and running on default ports.
