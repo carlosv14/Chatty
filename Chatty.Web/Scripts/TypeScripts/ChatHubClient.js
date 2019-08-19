@@ -6,7 +6,7 @@ var ChatHubClient = /** @class */ (function () {
         this.hub.client.sendMessage = this.receiveMessage;
         $.connection.hub.start().done(function () {
             _this.started = true;
-            console.log("conectado");
+            console.log("connected");
         });
     }
     ChatHubClient.prototype.hasStarted = function () {
