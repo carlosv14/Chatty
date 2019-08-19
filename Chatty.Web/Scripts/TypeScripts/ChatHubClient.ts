@@ -8,7 +8,7 @@
         this.hub.client.sendMessage = this.receiveMessage;
         $.connection.hub.start().done(() => {
             this.started = true;
-            console.log("conectado");
+            console.log("connected");
         });
     }
 
