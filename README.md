@@ -8,6 +8,7 @@ Realtime browser-based chat application with a bot that queries stock quotes.
 * RabbitMq
 * SignalR
 * EntityFramework
+* Moq
 
 ## Setup
 `git clone https://github.com/carlosv14/Chatty.git`
@@ -30,7 +31,7 @@ Project includes two initializers to drop and create database as needed, by defa
 3) Run
 
 ### Run Chat Bot
-Chat bot is a separate project you can either run the console project called Chatty.ChatBot.ConsoleHost or download and install Chat Bot Windows Service.
+Chat bot is a separate project, you can either run the console project called Chatty.ChatBot.ConsoleHost or download and install Chat Bot Windows Service.
 
 #### Steps
 1) Make sure [RabbitMq Server](https://www.rabbitmq.com/download.html) is installed and running on default ports.
@@ -40,6 +41,6 @@ Chat bot is a separate project you can either run the console project called Cha
 * Microsft Asp.net identity authentication.
 * User encrypted password and strength validation.
 * Windows Service Installer for chat bot.
-* Unit Testing.
+* Unit Testing with mocks.
 * Query stock quotes with `command: /stock=stock_code`
 
